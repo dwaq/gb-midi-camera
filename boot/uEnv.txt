@@ -6,7 +6,7 @@ enable_uboot_overlays=1
 
 # Overlays loaded on boot
 dtboverlay=/overlays/GB-35LCD-FEATHERWING.dtbo
-#dtboverlay1=
+dtboverlay1=/overlays/GB-I2C0.dtbo
 #dtboverlay2=
 #dtboverlay3=/overlays/GB-ETHERNET-FEATHERWING.dtbo
 #dtboverlay4=/overlays/GB-24LCD-FEATHERWING.dtbo
