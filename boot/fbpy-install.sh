@@ -2,6 +2,7 @@
 # restart script with root privileges if not already
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@" ]
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # not using because I can't get numpy to install
 # https://github.com/noisegate/fbpy
 # https://pythonhosted.org/fbpy/
