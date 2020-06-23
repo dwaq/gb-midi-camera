@@ -106,7 +106,8 @@ while True:
 
     for r, row in enumerate(thermal_image):
         print(["{0:.1f}".format(temp) for temp in row])
-        for c, column in enumerate(row):
+        # reverse to get the top/bottom orientation right
+        for c, column in enumerate(reversed(row)):
             # convert the temperature to a color
             color = calculateColor(column)
 
