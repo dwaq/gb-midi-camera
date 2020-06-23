@@ -3,6 +3,17 @@ import sys
 import os
 import time
 
+# get access to I2C
+import board
+import busio
+
+# thermal camera library
+import adafruit_amg88xx
+
+# get thermal camera objects
+i2c = busio.I2C(board.SCL, board.SDA)
+amg = adafruit_amg88xx.AMG88XX(i2c)
+
 # disable the mouse hardware
 os.environ['SDL_NOMOUSE'] = '1'
 
