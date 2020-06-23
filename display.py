@@ -48,6 +48,31 @@ def displayText(text, size, color, clearScreen):
     # only way to draw text is to overlay it using blit
     screen.blit(text, text.get_rect())
 
+def calculateColor(temperature):
+    # default values
+    blue = 0
+    red = 0
+
+    red = (temperature-15)*(255/20)
+    return (red, 0, 0)
+
+    '''
+    # temperature threshold
+    tth = 20
+
+    if (temperature < tth):
+        # lower is more blue
+        # (assumes min of 0)
+        blue = (25-temperature)*(255/25)
+        return (0, 0, blue)
+    else:
+        # higher is more red
+        # must be between 20-30
+
+    elif (temperature > 40):
+    '''
+
+
 #displayText('Giant Board', 30, (200,200,1), True)
 
 # fill screen with any color
@@ -64,14 +89,32 @@ gs = 40
 # starting position from left
 ls = (width - height) / 2
 
-for row in range(8):
-    for column in range(8):
-        pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(ls+(gs*row), gs*column, gs-3, gs-3))
+# gap between rectangles
+gap = 3
+
+# get min/max temperature values
+min_temp = min([min(r) for r in amg.pixels])
+max_temp = max([max(r) for r in amg.pixels])
+print("Min:", min_temp, "Max:", max_temp)
+
+#for row in range(8):
+#    for column in range(8):
+while True:
+    for r, row in enumerate(amg.pixels):
+        print(["{0:.1f}".format(temp) for temp in row])
+        for c, column in enumerate(row):
+            # convert the temperature to a color
+            color = calculateColor(column)
+
+            # display the rectangle at the cooresponding location
+            pygame.draw.rect(screen, color, pygame.Rect(ls+(gs*r), gs*c, gs-gap, gs-gap))
 
 
-# refresh the display
-pygame.display.flip()
+    # refresh the display
+    pygame.display.flip()
+
+    time.sleep(1)
 
 #time.sleep(3)
 # keep image on screen until done
-input("Press enter to exit...")
+#input("Press enter to exit...")
