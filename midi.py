@@ -83,7 +83,10 @@ def midiSetChannelBank(chan, bank):
   packet.append(bank)
   VS1053_MIDI.write(packet)
 
-def midiNoteOn(chan, n, vel):
+#def midiNoteOn(chan, n, vel):
+def midiNoteOn(n):
+  chan = 0
+  vel = 127
   #if (chan > 15) return
   #if (n > 127) return
   #if (vel > 127) return
@@ -94,7 +97,10 @@ def midiNoteOn(chan, n, vel):
   packet.append(vel)
   VS1053_MIDI.write(packet)
 
-def midiNoteOff(chan, n, vel):
+#def midiNoteOff(chan, n, vel):
+def midiNoteOff(n):
+  chan = 0
+  vel = 127
   #if (chan > 15) return
   #if (n > 127) return
   #if (vel > 127) return
