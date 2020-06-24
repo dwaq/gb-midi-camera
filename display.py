@@ -3,6 +3,9 @@ import sys
 import os
 import time
 
+# get access to MIDI library
+from midi import midiNoteOn, midiNoteOff
+
 # get access to I2C
 import board
 import busio
