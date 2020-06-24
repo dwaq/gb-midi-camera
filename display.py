@@ -138,17 +138,33 @@ while True:
     for r, row in enumerate(thermal_image):
         print(["{0:.2f}".format(temp) for temp in row])
 
+        # store the column's notes to start/stop at once
+        notes = []
+
         # reverse to get the top/bottom orientation right
         for c, column in enumerate(reversed(row)):
             # convert the temperature to a color
             color = calculateColor(column)
 
+            # send the location (from the bottom, not from the top like displayed) and the temperature
+            # to calculate which note to play for the current pixel 
+            notes.append(calculateNote(7-c, column))
+
             # display the rectangle at the cooresponding location
             pygame.draw.rect(screen, pygame.Color(color), pygame.Rect(ls+(gs*r), gs*c, gs-gap, gs-gap))
 
+        # refresh the display
+        pygame.display.flip()
 
-    # refresh the display
-    pygame.display.flip()
+        # play that column's notes all at once
+        for note in notes:
+            midiNoteOn(note)
+
+        time.sleep(0.5)
+
+        # stop all notes
+        for note in notes:
+            midiNoteOff(note)
 
 
 #time.sleep(3)
