@@ -74,6 +74,31 @@ def calculateColor(temperature):
 
     return iron_palette[t]
 
+# there's 128 (0x80) possible notes
+# there's 8 pixels per row
+# 0x80 / 8 = 0x10
+note_range = 0x10
+
+def calculateNote(position, temperature):
+    global temp_max, temp_min
+
+    # get range of temperatures from lowest to highest
+    temp_range = temp_max - temp_min
+
+    # subtract minimum to make the lowest temperature the lowest color
+    temp_adj = temperature - temp_min
+
+    # scale the temperature range to the note range
+    t = (temp_adj / temp_range) * note_range
+
+    # convert to int so it can be used as a note
+    t = int(t)
+
+    # move the note into the position's scale
+    t = t + (position * note_range)
+
+    print(position, temperature, t)
+
 #displayText('Giant Board', 30, (200,200,1), True)
 
 # fill screen with any color
