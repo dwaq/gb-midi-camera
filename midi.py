@@ -109,6 +109,7 @@ midiSetChannelBank(0, VS1053_BANK_MELODY)
 midiSetChannelVolume(0, 127)
 midiSetInstrument(0, VS1053_GM1_OCARINA)
 
+'''
 while True:
     for i in range(60, 69):
         midiNoteOn(0, i, 127)
@@ -116,3 +117,4 @@ while True:
         midiNoteOff(0, i, 127)
 
     sleep(1)
+'''
