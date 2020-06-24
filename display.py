@@ -89,15 +89,18 @@ def calculateNote(position, temperature):
     temp_adj = temperature - temp_min
 
     # scale the temperature range to the note range
-    t = (temp_adj / temp_range) * note_range
+    note = (temp_adj / temp_range) * note_range
 
     # convert to int so it can be used as a note
-    t = int(t)
+    note = int(note)
 
     # move the note into the position's scale
-    t = t + (position * note_range)
+    note = note + (position * note_range)
 
-    print(position, temperature, t)
+    #print(position, temperature, note)
+
+    # return the note to play later
+    return note
 
 #displayText('Giant Board', 30, (200,200,1), True)
 
