@@ -69,7 +69,7 @@ def calculateColor(temperature):
     # scale the temperature range to the color range
     t = (temp_adj / temp_range) * palette_count
 
-    # convert to int so it ca be used as index
+    # convert to int so it can be used as index
     t = int(t)
 
     #print(temperature, temp_adj, temp_min, temp_max, temp_range, t, palette_count)
@@ -136,7 +136,8 @@ while True:
     #print("Min:", temp_min, "Max:", temp_max)
 
     for r, row in enumerate(thermal_image):
-        print(["{0:.1f}".format(temp) for temp in row])
+        print(["{0:.2f}".format(temp) for temp in row])
+
         # reverse to get the top/bottom orientation right
         for c, column in enumerate(reversed(row)):
             # convert the temperature to a color
@@ -149,7 +150,6 @@ while True:
     # refresh the display
     pygame.display.flip()
 
-    time.sleep(1)
 
 #time.sleep(3)
 # keep image on screen until done
