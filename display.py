@@ -135,12 +135,13 @@ while True:
     temp_max = max([max(r) for r in thermal_image])
     #print("Min:", temp_min, "Max:", temp_max)
 
+    # store each pixel's notes to play after grid drawing is complete
+    notes = [[] for i in range(len(thermal_image))]
+
+    # draw grid of pixels
     for r, row in enumerate(thermal_image):
-        print(["{0:.2f}".format(temp) for temp in row])
-
-        # store the column's notes to start/stop at once
-        notes = []
-
+        #print(["{0:.2f}".format(temp) for temp in row])
+        
         # reverse to get the top/bottom orientation right
         for c, column in enumerate(reversed(row)):
             # convert the temperature to a color
@@ -148,23 +149,38 @@ while True:
 
             # send the location (from the bottom, not from the top like displayed) and the temperature
             # to calculate which note to play for the current pixel 
-            notes.append(calculateNote(7-c, column))
+            notes[r].append(calculateNote(7-c, column))
 
             # display the rectangle at the cooresponding location
             pygame.draw.rect(screen, pygame.Color(color), pygame.Rect(ls+(gs*r), gs*c, gs-gap, gs-gap))
+
+    # highlight each column and play its notes
+    for r, row in enumerate(thermal_image):
+        # draw a white rectangle around the current column
+        pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(ls+(gs*r), 0, gs-(gap/2), height-gap), 2)
 
         # refresh the display
         pygame.display.flip()
 
         # play that column's notes all at once
-        for note in notes:
+        for note in notes[r]:
             midiNoteOn(note)
 
-        time.sleep(0.5)
+        # wait a quarter note
+        time.sleep(0.25)
 
         # stop all notes
-        for note in notes:
+        for note in notes[r]:
             midiNoteOff(note)
+
+        # remove that white rectangle (by drawing a black one over it)
+        pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(ls+(gs*r), 0, gs-(gap/2), height-gap), 2)
+
+        # refresh the display
+        pygame.display.flip()
+
+    # clear all notes for the next iteration
+    del notes[:]
 
 
 #time.sleep(3)
