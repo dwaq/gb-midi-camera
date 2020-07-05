@@ -12,3 +12,6 @@ wget -O - http://git.zsinfo.nl/snippets/8/raw | bash
 # install pygame under sudo because it needs sudo to access framebuffer
 # https://www.pygame.org/wiki/GettingStarted
 sudo python3 -m pip install -U pygame
+
+# driver for thermal camera:
+sudo python3 -m pip install -U adafruit-circuitpython-amg88xx
