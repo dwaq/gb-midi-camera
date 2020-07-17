@@ -13,4 +13,7 @@
 #
 # Put this script in /etc/
 
+# this should start my program without waiting for internet
+sudo systemctl disable connman-wait-online.service
+
 /home/debian/display.py &
